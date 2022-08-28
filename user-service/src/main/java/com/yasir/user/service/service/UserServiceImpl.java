@@ -28,22 +28,21 @@ public class UserServiceImpl implements UserService {
 		return user.get();
 	}
 
-//	@SuppressWarnings("static-access")
-//	public User updateUser(User user) {
-//		Optional<User> optional = userRepository.findById(user.getId());
-//		if (optional.isPresent()) {
-//			User newUser = optional.get();
-//			newUser.builder()
-////				.name(user.getName())
-//				.userName(user.getUserName())
-//				.password(user.getPassword())
-////				.addresses(user.getAddresses())
-//				.phoneNumber(user.getPhoneNumber())
-//				.email(user.getEmail());
-//			newUser = userRepository.save(newUser);
-//		}
-//		return user;
-//	}
+	@SuppressWarnings("static-access")
+	public User updateUser(User user) {
+		Optional<User> optional = userRepository.findById(user.getId());
+		if (optional.isPresent()) {
+			User newUser = optional.get();
+			newUser.setUserName(user.getUserName());
+			newUser.setPassword(user.getPassword());
+			newUser.setEmail(user.getEmail());
+			newUser.setPhoneNumber(user.getPhoneNumber());
+			return userRepository.save(newUser);
+		} else {
+			return userRepository.save(user);
+		}
+		
+	}
 
 	public void deleteUser(Long id) {
 		userRepository.deleteById(id);	

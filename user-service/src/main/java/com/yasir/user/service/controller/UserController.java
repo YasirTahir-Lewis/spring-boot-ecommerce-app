@@ -25,7 +25,7 @@ public class UserController {
 	@Autowired
 	private UserServiceImpl userServiceImpl;
 
-	@GetMapping("/getAll")
+	@GetMapping("/getall")
 	public ResponseEntity<List<User>> getAllUsers() {
 		return new ResponseEntity<List<User>>(userServiceImpl.getAllUsers(), HttpStatus.OK);
 	}
@@ -35,15 +35,15 @@ public class UserController {
 		return new ResponseEntity<User>(userServiceImpl.getUserById(id), HttpStatus.OK);
 	}
 
-	@PostMapping("/addUser")
+	@PostMapping("/adduser")
 	public ResponseEntity<User> addUser(@RequestBody User user) {
 		return new ResponseEntity<User>(userServiceImpl.addUser(user), HttpStatus.CREATED);
 	}
 
-//	@PutMapping("/updateUser")
-//	public ResponseEntity<User> updateUser(@RequestBody User user) {
-//		return new ResponseEntity<User>(userServiceImpl.updateUser(user), HttpStatus.CREATED);
-//	}
+	@PutMapping("/updateuser")
+	public ResponseEntity<User> updateUser(@RequestBody User user) {
+		return new ResponseEntity<User>(userServiceImpl.updateUser(user), HttpStatus.CREATED);
+	}
 
 	@DeleteMapping("/delete/{id}")
 	public ResponseEntity<Void> deleteUser(@PathVariable Long id) {

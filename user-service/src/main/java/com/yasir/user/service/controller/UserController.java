@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.yasir.user.service.entity.User;
+import com.yasir.user.service.service.UserService;
 import com.yasir.user.service.service.UserServiceImpl;
 
 
@@ -23,31 +24,31 @@ import com.yasir.user.service.service.UserServiceImpl;
 public class UserController {
 
 	@Autowired
-	private UserServiceImpl userServiceImpl;
+	private UserService userService;
 
 	@GetMapping("/getall")
 	public ResponseEntity<List<User>> getAllUsers() {
-		return new ResponseEntity<List<User>>(userServiceImpl.getAllUsers(), HttpStatus.OK);
+		return new ResponseEntity<List<User>>(userService.getAllUsers(), HttpStatus.OK);
 	}
 
 	@GetMapping("/get/{id}")
 	public ResponseEntity<User> getUserById(@PathVariable Long id) {
-		return new ResponseEntity<User>(userServiceImpl.getUserById(id), HttpStatus.OK);
+		return new ResponseEntity<User>(userService.getUserById(id), HttpStatus.OK);
 	}
 
 	@PostMapping("/adduser")
 	public ResponseEntity<User> addUser(@RequestBody User user) {
-		return new ResponseEntity<User>(userServiceImpl.addUser(user), HttpStatus.CREATED);
+		return new ResponseEntity<User>(userService.addUser(user), HttpStatus.CREATED);
 	}
 
 	@PutMapping("/updateuser")
 	public ResponseEntity<User> updateUser(@RequestBody User user) {
-		return new ResponseEntity<User>(userServiceImpl.updateUser(user), HttpStatus.CREATED);
+		return new ResponseEntity<User>(userService.updateUser(user), HttpStatus.CREATED);
 	}
 
 	@DeleteMapping("/delete/{id}")
 	public ResponseEntity<Void> deleteUser(@PathVariable Long id) {
-		userServiceImpl.deleteUser(id);
+		userService.deleteUser(id);
 		return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
 	}
 }

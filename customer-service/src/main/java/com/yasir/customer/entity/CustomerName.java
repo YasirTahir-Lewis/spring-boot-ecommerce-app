@@ -1,37 +1,37 @@
-package com.yasir.user.service.entity;
+package com.yasir.customer.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
 
-//import javax.validation.constraints.NotEmpty;
-//import lombok.AllArgsConstructor;
-//import lombok.Data;
-//import lombok.NoArgsConstructor;
 
-//@Entity
-//@Table(name = "names_detail")
-public class Names {
-//	@Id
-//	@GeneratedValue(strategy = GenerationType.IDENTITY)
+@Entity
+@Table(name = "customer_name_details")
+public class CustomerName {
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	@NotNull
+
 	@Column(name = "first_name")
 	private String fName;
-	@NotNull
+
 	@Column(name = "last_name")
 	private String lName;
 
-	public Names(String fName, String lName) {
+	@OneToOne(mappedBy = "name")
+	private Customer customer;
+
+	public CustomerName(String fName, String lName) {
 		this.fName = fName;
 		this.lName = lName;
 	}
 
-	public Names() {
+	public CustomerName() {
 
 	}
 
@@ -57,6 +57,14 @@ public class Names {
 
 	public void setlName(String lName) {
 		this.lName = lName;
+	}
+
+	public Customer getCustomer() {
+		return customer;
+	}
+
+	public void setCustomer(Customer customer) {
+		this.customer = customer;
 	}
 
 }

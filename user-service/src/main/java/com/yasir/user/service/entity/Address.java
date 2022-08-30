@@ -20,7 +20,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "user_addresses")
+@Table(name = "users_addresses")
 public class Address {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -114,10 +114,5 @@ public class Address {
 
 	}
 
-	@Override
-	public String toString() {
-		return "Address [id=" + id + ", streetNumber=" + streetNumber + ", unitApt=" + unitApt + ", city=" + city
-				+ ", state=" + state + ", zipCode=" + zipCode + "]";
-	}
 
 }

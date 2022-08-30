@@ -1,11 +1,10 @@
-package com.yasir.user.service.entity;
+package com.yasir.customer.entity;
 
 import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -14,45 +13,43 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.Email;
-import javax.validation.constraints.NotNull;
-
-//import lombok.AllArgsConstructor;
-//import lombok.Builder;
-//import lombok.Data;
-//import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "users_table")
-public class User {
+@Table(name = "customers_data")
+public class Customer {
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	@NotNull
+
 	@Column(name = "user_name")
 	private String userName;
-	@NotNull
+
 	private String password;
+
+	@Column(name = "email_address")
 	@Email
 	private String email;
+
 	@Column(name = "phone_number")
 	private String phoneNumber;
 
-//	@OneToOne(cascade = CascadeType.ALL)
-//	@JoinColumn(name = "fk_name_id")
-//	private Names names;
-
 	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "fk_user_address")
-	private Address addresses;
+	@JoinColumn(name = "fk_customer_name_id", referencedColumnName = "id")
+	private CustomerName name;
 
-	public User(@NotNull String userName, @NotNull String password, @Email String email, String phoneNumber) {
+	@OneToMany(cascade = CascadeType.ALL)
+	@JoinColumn(name = "fk_customer_address_id", nullable = false)
+	private List<CustomerLocation> addresses;
+
+	public Customer(String userName, String password, @Email String email, String phoneNumber) {
 		this.userName = userName;
 		this.password = password;
 		this.email = email;
 		this.phoneNumber = phoneNumber;
 	}
 
-	public User() {
+	public Customer() {
 
 	}
 
@@ -96,26 +93,26 @@ public class User {
 		this.phoneNumber = phoneNumber;
 	}
 
-//	public Names getNames() {
-//		return names;
-//	}
-//
-//	public void setNames(Names names) {
-//		this.names = names;
-//	}
+	public CustomerName getName() {
+		return name;
+	}
 
-	public Address getAddresses() {
+	public void setName(CustomerName name) {
+		this.name = name;
+	}
+
+	public List<CustomerLocation> getAddresses() {
 		return addresses;
 	}
 
-	public void setAddresses(Address addresses) {
+	public void setAddresses(List<CustomerLocation> addresses) {
 		this.addresses = addresses;
 	}
 
 	@Override
 	public String toString() {
-		return "User [id=" + id + ", userName=" + userName + ", password=" + password + ", email=" + email
-				+ ", phoneNumber=" + phoneNumber + ", addresses=" + addresses + "]";
+		return "Customer [id=" + id + ", userName=" + userName + ", password=" + password + ", email=" + email
+				+ ", phoneNumber=" + phoneNumber + ", name=" + name + ", addresses=" + addresses + "]";
 	}
 
 }

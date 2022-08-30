@@ -19,8 +19,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-//@Entity
-//@Table(name = "address_details")
+@Entity
+@Table(name = "user_addresses")
 public class Address {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -43,9 +43,8 @@ public class Address {
 	private int zipCode;
 	
 //	@ManyToOne
-//	@JoinColumn(name = "fk_user_address", nullable = false, referencedColumnName = "id")
 //	private User user;
-
+//
 //	public User getUser() {
 //		return user;
 //	}

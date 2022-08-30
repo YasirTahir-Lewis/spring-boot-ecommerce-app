@@ -14,7 +14,7 @@ import javax.validation.constraints.NotNull;
 //import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "name_detail")
+@Table(name = "names_detail")
 public class Names {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

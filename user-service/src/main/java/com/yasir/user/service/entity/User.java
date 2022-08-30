@@ -41,9 +41,9 @@ public class User {
 	@JoinColumn(name = "fk_name_id")
 	private Names names;
 
-//	@OneToMany(cascade = CascadeType.ALL)
-//    @JoinColumn(name = "fk_user_addresses", referencedColumnName = "id")
-//	private List<Address> addresses;
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "fk_user_address")
+	private Address addresses;
 
 	public User(@NotNull String userName, @NotNull String password, @Email String email, String phoneNumber) {
 		this.userName = userName;
@@ -104,18 +104,18 @@ public class User {
 		this.names = names;
 	}
 
-//	public List<Address> getAddresses() {
-//		return addresses;
-//	}
-//
-//	public void setAddresses(List<Address> addresses) {
-//		this.addresses = addresses;
-//	}
+	public Address getAddresses() {
+		return addresses;
+	}
+
+	public void setAddresses(Address addresses) {
+		this.addresses = addresses;
+	}
 
 	@Override
 	public String toString() {
 		return "User [id=" + id + ", userName=" + userName + ", password=" + password + ", email=" + email
-				+ ", phoneNumber=" + phoneNumber + ", names=" + names + "]";
+				+ ", phoneNumber=" + phoneNumber + ", names=" + names + ", addresses=" + addresses + "]";
 	}
 
 }
